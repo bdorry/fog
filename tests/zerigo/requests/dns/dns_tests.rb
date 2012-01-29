@@ -10,7 +10,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
   def generate_unique_domain( with_trailing_dot = false)
     #get time (with 1/100th of sec accuracy)
     #want unique domain name and if provider is fast, this can be called more than once per second
-    time= (Time.now.to_f * 100).to_i   
+    time= (Time.now.to_f * 100).to_i
     domain = 'test-' + time.to_s + '.com'
     if with_trailing_dot
       domain+= '.'
@@ -44,7 +44,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
         #worked so can now delete
         response = Fog::DNS[:zerigo].delete_zone( zone_id)
       end
-      
+
       response.status == 200
     end
 
@@ -59,7 +59,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
         #worked so can now delete
         response = Fog::DNS[:zerigo].delete_zone( zone_id)
       end
-      
+
       response.status == 200
     end
 
@@ -77,19 +77,19 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
 
       response.status == 200
     end
-    
+
     test('create zone - set all parameters') do
       pending if Fog.mocking?
 
       @domain = generate_unique_domain
-      options = { :nx_ttl => 1800, :active => 'N', :hostmaster => "netops@#{@domain}", 
+      options = { :nx_ttl => 1800, :active => 'N', :hostmaster => "netops@#{@domain}",
                   :notes => 'for client ABC', :tag_list=> 'sample-tag' }
       response = Fog::DNS[:zerigo].create_zone( @domain, 14400, 'pri', options )
       if response.status == 201
         @zone_id = response.body['id']
         @new_zones << @zone_id
       end
-      
+
       response.status == 201
     end
 
@@ -97,14 +97,14 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
       pending if Fog.mocking?
 
       result= false
-      
+
       response = Fog::DNS[:zerigo].get_zone( @zone_id)
       if response.status == 200
         zone = response.body
-        if (zone['ns-type'] == 'pri') and (zone['tag-list'] == 'sample-tag') and 
+        if (zone['ns-type'] == 'pri') and (zone['tag-list'] == 'sample-tag') and
             (zone['default-ttl'] == 14400) and (zone['nx-ttl'] == 1800) and
-            (zone['updated-at'].length > 0) and (zone['created-at'].length > 0) and 
-            (zone['domain'] == @domain) and (zone['notes'] == 'for client ABC') and 
+            (zone['updated-at'].length > 0) and (zone['created-at'].length > 0) and
+            (zone['domain'] == @domain) and (zone['notes'] == 'for client ABC') and
             (zone['id'] == @zone_id)
             result = true
         end
@@ -112,13 +112,13 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
         result
       end
     end
-    
+
     test("update zone #{@zone_id} - set notes & tags") do
       pending if Fog.mocking?
-      
+
       options = { :notes => 'for client XYZ', :tag_list=> 'testing-tag' }
       response = Fog::DNS[:zerigo].update_zone( @zone_id, options )
-      
+
       response.status == 200
     end
 
@@ -126,23 +126,23 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
       pending if Fog.mocking?
 
       result= false
-      
+
       response = Fog::DNS[:zerigo].get_zone( @zone_id)
       if response.status == 200
         zone = response.body
-        if (zone['tag-list'] == 'testing-tag') and (zone['notes'] == 'for client XYZ') 
+        if (zone['tag-list'] == 'testing-tag') and (zone['notes'] == 'for client XYZ')
             result = true
         end
 
         result
       end
     end
-    
-    test("get zone stats for #{@zone_id}") do 
+
+    test("get zone stats for #{@zone_id}") do
       pending if Fog.mocking?
 
       result= false
-      
+
       response = Fog::DNS[:zerigo].get_zone_stats( @zone_id)
       if response.status == 200
         zone = response.body
@@ -150,12 +150,12 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
            (zone['period-begin'].length > 0) and (zone['period-end'].length > 0)
           result= true
         end
-        
+
         result
       end
 
     end
-    
+
     test('list zones - make sure total count is correct') do
        pending if Fog.mocking?
 
@@ -171,7 +171,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
 
        result
      end
-    
+
     test('create record - simple A record') do
       pending if Fog.mocking?
 
@@ -182,13 +182,13 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
         record_id = response.body['id']
         @new_records << record_id
       end
-      
+
       response.status == 201
     end
-  
+
     test('create record - CNAME record') do
       pending if Fog.mocking?
-      
+
       host = 'mail'
       options = { :hostname => host }
       response = Fog::DNS[:zerigo].create_host( @zone_id, 'CNAME', @domain, options)
@@ -196,7 +196,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
         record_id = response.body['id']
         @new_records << record_id
       end
-      
+
       response.status == 201
     end
 
@@ -214,7 +214,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
         record_id = response.body['id']
         @new_records << record_id
       end
-      
+
       response.status == 201
     end
 
@@ -228,15 +228,15 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
         @record_id = response.body['id']
         @new_records << @record_id
       end
-      
+
       response.status == 201
     end
-        
+
     test("get host #{@record_id}") do
       pending if Fog.mocking?
 
       result = false
-      
+
       response = Fog::DNS[:zerigo].get_host( @record_id)
       if response.status == 200
         host = response.body
@@ -245,7 +245,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
           result = true
         end
       end
-      
+
       result
     end
 
@@ -253,7 +253,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
       pending if Fog.mocking?
 
       result = false
-      
+
       options = { :priority => 7 }
       response = Fog::DNS[:zerigo].update_host( @record_id, options)
       if response.status == 200
@@ -265,7 +265,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
           end
         end
       end
-              
+
       result
     end
 
@@ -277,7 +277,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
       if response.status == 200
         host_count = response.body['count']
       end
-      
+
       host_count == 4
     end
 
@@ -285,7 +285,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
       pending if Fog.mocking?
 
       result = false
-      
+
       response = Fog::DNS[:zerigo].list_hosts( @zone_id)
       if response.status == 200
         hosts = response.body['hosts']
@@ -297,16 +297,16 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
             end
           }
         end
-      end      
-      
+      end
+
       result
     end
-  
+
     test("find host: mail.#{@domain}") do
       pending if Fog.mocking?
 
       result = false
-      
+
       host = 'mail.' + @domain
       response = Fog::DNS[:zerigo].find_hosts( host)
       if response.status == 200
@@ -316,7 +316,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
           result = true
         end
       end
-      
+
       result
     end
 
@@ -324,7 +324,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
       pending if Fog.mocking?
 
       result = false
-      
+
       host = 'mail.' + @domain
       response = Fog::DNS[:zerigo].find_hosts( host, @zone_id)
       if response.status == 200
@@ -334,7 +334,7 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
           result = true
         end
       end
-      
+
       result
     end
 
@@ -364,10 +364,10 @@ Shindo.tests('Fog::DNS[:zerigo] | DNS requests', ['zerigo', 'dns']) do
       }
       result
     end
-        
+
   end
-  
+
   tests( 'failure') do
   end
-  
+
 end

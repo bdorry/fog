@@ -4,20 +4,20 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
   @zone_id = ''
   @change_id = ''
   @new_records =[]
- 
+
   # NOTE: can't use generate_unique_domain() as we do in other DNS provider
-  #       test suites as AWS charges $1/mth for each domain, even if it exists 
+  #       test suites as AWS charges $1/mth for each domain, even if it exists
   #       on AWS for only the time that this test suite runs!!
   #       http://aws.amazon.com/route53/pricing/
   @test_domain = 'test-343246324434.com'
-  
+
   tests( 'success') do
 
     test('see if test domain already exists') do
       pending if Fog.mocking?
-      
+
       @zone_id = nil
-      
+
       response = Fog::DNS[:aws].list_hosted_zones()
       if response.status == 200
         @hosted_zones = response.body['HostedZones']
@@ -30,10 +30,10 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
           @zone_id = zone['Id']
         end
       }
-      
+
       @zone_id.nil?
     end
-      
+
     test('get current zone count') do
       pending if Fog.mocking?
 
@@ -51,7 +51,7 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
       pending if Fog.mocking?
 
       result = false
-      
+
       response = Fog::DNS[:aws].create_hosted_zone( @test_domain)
       if response.status == 201
 
@@ -66,7 +66,7 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
           @change_id = change_info['Id']
           status = change_info['Status']
           ns_srv_count = ns_servers.count
-          
+
           if (@zone_id.length > 0) and (caller_ref.length > 0) and (@change_id.length > 0) and
              (status.length > 0) and (ns_srv_count > 0)
             result = true
@@ -76,7 +76,7 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
 
       result
     }
-    
+
     test("get status of change #{@change_id}") {
       pending if Fog.mocking?
 
@@ -88,15 +88,15 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
           result= true
         end
       end
-      
+
       result
     }
-   
+
     test("get info on hosted zone #{@zone_id}") {
       pending if Fog.mocking?
 
       result = false
-      
+
       response = Fog::DNS[:aws].get_hosted_zone( @zone_id)
       if response.status == 200
         zone = response.body['HostedZone']
@@ -106,24 +106,24 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
         ns_servers = response.body['NameServers']
 
         # AWS returns domain with a dot at end - so when compare, remove dot
-        
+
         if (zone_id == @zone_id) and (name.chop == @test_domain) and (caller_ref.length > 0) and
            (ns_servers.count > 0)
            result = true
         end
       end
-      
+
       result
     }
-    
+
     test('list zones') do
       pending if Fog.mocking?
 
       result = false
-      
+
       response = Fog::DNS[:aws].list_hosted_zones()
       if response.status == 200
-        
+
         zones= response.body['HostedZones']
         if (zones.count > 0)
           zone= zones[0]
@@ -132,37 +132,37 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
           caller_ref = zone['CallerReference']
         end
         max_items = response.body['MaxItems']
-                  
-        if (zone_id.length > 0) and (zone_name.length > 0) and (caller_ref.length > 0) and 
+
+        if (zone_id.length > 0) and (zone_name.length > 0) and (caller_ref.length > 0) and
            (max_items > 0)
           result = true
-        end      
+        end
       end
 
       result
     end
-    
+
     test("add a A resource record") {
       pending if Fog.mocking?
 
       result = false
-      
+
       # create an A resource record
       host = 'www.' + @test_domain
       ip_addrs = ['1.2.3.4']
       resource_record = { :name => host, :type => 'A', :ttl => 3600, :resource_records => ip_addrs }
       resource_record_set = resource_record.merge( :action => 'CREATE')
-  
+
       change_batch = []
       change_batch << resource_record_set
-      options = { :comment => 'add A record to domain'}             
+      options = { :comment => 'add A record to domain'}
       response = Fog::DNS[:aws].change_resource_record_sets( @zone_id, change_batch, options)
       if response.status == 200
         change_id = response.body['Id']
         status = response.body['Status']
         @new_records << resource_record
       end
-      
+
       response.status == 200
     }
 
@@ -170,47 +170,47 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
       pending if Fog.mocking?
 
       result = false
-      
+
       # create a CNAME resource record
       host = 'mail.' + @test_domain
       value = ['www.' + @test_domain]
       resource_record = { :name => host, :type => 'CNAME', :ttl => 3600, :resource_records => value }
       resource_record_set = resource_record.merge( :action => 'CREATE')
-  
+
       change_batch = []
       change_batch << resource_record_set
-      options = { :comment => 'add CNAME record to domain'}             
+      options = { :comment => 'add CNAME record to domain'}
       response = Fog::DNS[:aws].change_resource_record_sets( @zone_id, change_batch, options)
       if response.status == 200
         change_id = response.body['Id']
         status = response.body['Status']
         @new_records << resource_record
       end
-      
+
       response.status == 200
     }
-    
+
     test("add a MX resource record") {
       pending if Fog.mocking?
 
       result = false
-      
+
       # create a MX resource record
       host = @test_domain
       value = ['7 mail.' + @test_domain]
       resource_record = { :name => host, :type => 'MX', :ttl => 3600, :resource_records => value }
       resource_record_set = resource_record.merge( :action => 'CREATE')
-  
+
       change_batch = []
       change_batch << resource_record_set
-      options = { :comment => 'add MX record to domain'}             
+      options = { :comment => 'add MX record to domain'}
       response = Fog::DNS[:aws].change_resource_record_sets( @zone_id, change_batch, options)
       if response.status == 200
         change_id = response.body['Id']
         status = response.body['Status']
         @new_records << resource_record
       end
-      
+
       response.status == 200
     }
 
@@ -231,13 +231,13 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
       pending if Fog.mocking?
 
       result = true
-      
+
       change_batch = []
-      @new_records.each { |record|      
+      @new_records.each { |record|
         resource_record_set = record.merge( :action => 'DELETE')
         change_batch << resource_record_set
       }
-      options = { :comment => 'remove records from domain'}             
+      options = { :comment => 'remove records from domain'}
       response = Fog::DNS[:aws].change_resource_record_sets( @zone_id, change_batch, options)
       if response.status != 200
         result = false
@@ -246,7 +246,7 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
 
       result
     }
-    
+
     test("delete hosted zone #{@zone_id}") {
       pending if Fog.mocking?
 
@@ -254,7 +254,7 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
 
       response.status == 200
     }
-  
+
   end
 
 
@@ -263,14 +263,14 @@ Shindo.tests('Fog::DNS[:aws] | DNS requests', ['aws', 'dns']) do
       pending if Fog.mocking?
       response = Fog::DNS[:aws].create_hosted_zone('invalid-domain')
     end
-    
+
     tests('get hosted zone using invalid ID').raises(Excon::Errors::Forbidden) do
       pending if Fog.mocking?
       zone_id = 'dummy-id'
       response = Fog::DNS[:aws].get_hosted_zone(zone_id)
     end
-  
+
   end
 
-  
+
 end

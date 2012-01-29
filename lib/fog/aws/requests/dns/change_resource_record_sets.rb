@@ -15,8 +15,8 @@ module Fog
         #     * changes<~Hash> -
         #       * action<~String> -  'CREATE' or 'DELETE'
         #       * name<~String> - This must be a fully-specified name, ending with a final period
-        #       * type<~String> - A | AAAA | CNAME | MX | NS | PTR | SOA | SPF | SRV | TXT 
-        #       * ttl<~Integer> - 
+        #       * type<~String> - A | AAAA | CNAME | MX | NS | PTR | SOA | SPF | SRV | TXT
+        #       * ttl<~Integer> -
         #       * resource_record<~String>
         #
         # ==== Returns
@@ -29,7 +29,7 @@ module Fog
         #   * status<~Integer> - 201 when successful
         def change_resource_record_sets(zone_id, change_batch, options = {})
 
-          # AWS methods return zone_ids that looks like '/hostedzone/id'.  Let the caller either use 
+          # AWS methods return zone_ids that looks like '/hostedzone/id'.  Let the caller either use
           # that form or just the actual id (which is what this request needs)
           zone_id = zone_id.sub('/hostedzone/', '')
 
@@ -40,12 +40,12 @@ module Fog
               optional_tags+= "<Comment>#{value}</Comment>"
             end
           }
-          
+
           #build XML
           if change_batch.count > 0
-            
+
             changes= "<ChangeBatch>#{optional_tags}<Changes>"
-            
+
             change_batch.each { |change_item|
               action_tag = %Q{<Action>#{change_item[:action]}</Action>}
               name_tag = %Q{<Name>#{change_item[:name]}</Name>}
@@ -57,11 +57,11 @@ module Fog
                 resource_record_tags+= %Q{<ResourceRecord><Value>#{record}</Value></ResourceRecord>}
               }
               resource_tag=  %Q{<ResourceRecords>#{resource_record_tags}</ResourceRecords>}
-              
+
               change_tags = %Q{<Change>#{action_tag}<ResourceRecordSet>#{name_tag}#{type_tag}#{ttl_tag}#{resource_tag}</ResourceRecordSet></Change>}
               changes+= change_tags
-            }          
-            
+            }
+
             changes+= '</Changes></ChangeBatch>'
           end
 

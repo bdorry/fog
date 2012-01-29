@@ -57,10 +57,10 @@ module Fog
               else
                 data.store(meta["key"], meta["value"])
               end
-            end 
+            end
           end
           data
-        end 
+        end
 
       end
 

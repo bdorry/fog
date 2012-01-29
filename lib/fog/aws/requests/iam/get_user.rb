@@ -6,7 +6,7 @@ module Fog
         require 'fog/aws/parsers/iam/get_user'
 
         # Get User
-        # 
+        #
         # ==== Parameters
         # * options<~Hash>:
         #   * 'UserName'<~String>: Name of the User. Defaults to current user

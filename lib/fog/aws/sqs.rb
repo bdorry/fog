@@ -30,7 +30,7 @@ module Fog
             end
           end
         end
-        
+
         def self.reset
           @data = nil
         end

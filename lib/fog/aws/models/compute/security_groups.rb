@@ -28,12 +28,12 @@ module Fog
         #    vpc_id=nil
         #  >
         #
-        
+
         def initialize(attributes)
           self.filters ||= {}
           super
         end
-        
+
         # Returns an array of all security groups that have been created
         #
         # AWS.security_groups.all
@@ -82,9 +82,9 @@ module Fog
         #    ip_permissions=[{"groups"=>[{"groupName"=>"default", "userId"=>"312571045469"}], "fromPort"=>-1, "toPort"=>-1, "ipRanges"=>[], "ipProtocol"=>"icmp"}, {"groups"=>[{"groupName"=>"default", "userId"=>"312571045469"}], "fromPort"=>0, "toPort"=>65535, "ipRanges"=>[], "ipProtocol"=>"tcp"}, {"groups"=>[{"groupName"=>"default", "userId"=>"312571045469"}], "fromPort"=>0, "toPort"=>65535, "ipRanges"=>[], "ipProtocol"=>"udp"}],
         #    owner_id="312571045469"
         #    vpc_id=nil
-        #  > 
+        #  >
         #
-        
+
         def get(group_name)
           if group_name
             self.class.new(:connection => connection).all('group-name' => group_name).first
@@ -105,9 +105,9 @@ module Fog
         #    description="default group",
         #    ip_permissions=[{"groups"=>[{"groupName"=>"default", "userId"=>"312571045469"}], "fromPort"=>-1, "toPort"=>-1, "ipRanges"=>[], "ipProtocol"=>"icmp"}, {"groups"=>[{"groupName"=>"default", "userId"=>"312571045469"}], "fromPort"=>0, "toPort"=>65535, "ipRanges"=>[], "ipProtocol"=>"tcp"}, {"groups"=>[{"groupName"=>"default", "userId"=>"312571045469"}], "fromPort"=>0, "toPort"=>65535, "ipRanges"=>[], "ipProtocol"=>"udp"}],
         #    owner_id="312571045469"
-        #  > 
+        #  >
         #
-        
+
         def get_by_id(group_id)
           if group_id
             self.class.new(:connection => connection).all('group-id' => group_id).first

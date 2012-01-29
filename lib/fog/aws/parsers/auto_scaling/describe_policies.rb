@@ -20,13 +20,13 @@ module Fog
           def reset_alarm
             @alarm = {}
           end
-          
+
           def start_element(name, attrs = [])
             super
             case name
             when 'Alarms'
-              @in_alarms = true              
-            end            
+              @in_alarms = true
+            end
           end
 
           def end_element(name)
@@ -47,15 +47,15 @@ module Fog
 
             when 'DescribePoliciesResponse'
               @response['DescribePoliciesResult'] = @results
-            
+
             when 'Alarms'
               if @in_alarms == true
                 @scaling_policy['Alarms'] << @alarm
                 reset_alarm
-              end            
+              end
             when 'member'
               @results['ScalingPolicies'] << @scaling_policy
-              reset_scaling_policy              
+              reset_scaling_policy
             end
           end
 

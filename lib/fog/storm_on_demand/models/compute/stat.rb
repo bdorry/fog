@@ -11,7 +11,7 @@ module Fog
         attribute :domain
         attribute :disk
         attribute :uptime
-        
+
         def initialize(attributes={})
           super
         end

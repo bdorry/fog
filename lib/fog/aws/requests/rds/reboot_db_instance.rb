@@ -37,7 +37,7 @@ module Fog
                 "RebootDBInstanceResult" => { "DBInstance" => self.data[:servers][instance_identifier] }
               }
               response
-              
+
             end
           else
             raise Fog::AWS::RDS::NotFound.new("DBInstance #{instance_identifier} not found")

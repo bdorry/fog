@@ -162,7 +162,7 @@ module Fog
 
       end
 
-    
+
       class Real
         include Utils
 

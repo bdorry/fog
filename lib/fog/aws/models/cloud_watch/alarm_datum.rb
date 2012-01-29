@@ -16,7 +16,7 @@ module Fog
         attribute :comparison_operator, :aliases => 'ComparisonOperator'
         attribute :state_reason, :aliases => 'StateReason'
         attribute :action_enabled, :aliases => 'ActionsEnabled'
-        attribute :period, :aliases => 'Period' 
+        attribute :period, :aliases => 'Period'
         attribute :evaluation_periods, :aliases => 'EvaluationPeriods'
         attribute :threshold, :aliases => 'Threshold'
         attribute :alarm_actions, :aliases => 'AlarmActions'
@@ -40,7 +40,7 @@ module Fog
               'AlarmName' => alarm_name,
               'ComparisonOperator' => comparison_operator,
               'EvaluationPeriods' => evaluation_periods,
-              'MetricName' => metric_name, 
+              'MetricName' => metric_name,
               'Namespace' => namespace,
               'Period' => period,
               'Statistic' => statistic,

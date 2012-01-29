@@ -105,7 +105,7 @@ module Fog
           params[:headers] ||= {}
           params[:headers]['Date'] = Fog::Time.now.to_date_header
           params[:headers]['Authorization'] = "AWS #{@aws_access_key_id}:#{signature(params)}"
-          params[:path] = "/#{@version}/#{params[:path]}" 
+          params[:path] = "/#{@version}/#{params[:path]}"
           @connection.request(params, &block)
         end
 

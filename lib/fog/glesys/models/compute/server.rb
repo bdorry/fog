@@ -32,7 +32,7 @@ module Fog
 
         def start
           requires :identity
-          connection.start(:serverid => identity) 
+          connection.start(:serverid => identity)
         end
 
         def stop
@@ -59,12 +59,12 @@ module Fog
             :cpucores   => cpucores || "1",
             :rootpw     => rootpw,
             :transfer   => transfer || "500",
-          } 
+          }
           data = connection.create(options)
           merge_attributes(data.body['response']['server'])
           data.status == 200 ? true : false
         end
-        
+
       end
     end
   end

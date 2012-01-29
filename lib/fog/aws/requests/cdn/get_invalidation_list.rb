@@ -24,7 +24,7 @@ module Fog
         #
         # ==== See Also
         # http://docs.amazonwebservices.com/AmazonCloudFront/latest/APIReference/ListInvalidation.html
-        
+
         def get_invalidation_list(distribution_id, options = {})
           request({
             :expects    => 200,

@@ -30,7 +30,7 @@ module Fog
         def put_bucket_acl(bucket_name, acl)
           data = ""
           headers = {}
-          
+
           if acl.is_a?(Hash)
             data = Fog::Storage::AWS.hash_to_acl(acl)
           else
@@ -54,7 +54,7 @@ module Fog
           })
         end
       end
-        
+
       class Mock
         def put_bucket_acl(bucket_name, acl)
           if acl.is_a?(Hash)
@@ -64,7 +64,7 @@ module Fog
               raise Excon::Errors::BadRequest.new('invalid x-amz-acl')
             end
             self.data[:acls][:bucket][bucket_name] = acl
-          end        
+          end
         end
       end
 

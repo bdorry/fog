@@ -76,10 +76,10 @@ module Fog
           @connection = Fog::Connection.new(@api_url, @persistent, @connection_options)
         end
 
-        def request(method_name, options = {}) 
+        def request(method_name, options = {})
 
           options.merge!( {:format => 'json'})
-          
+
           begin
             parser = options.delete(:parser)
             data = @connection.request(
@@ -106,9 +106,9 @@ module Fog
               Fog::Compute::Glesys::NotFound.slurp(error)
             else
               error
-            end 
-          end 
-        end 
+            end
+          end
+        end
 
         private
 

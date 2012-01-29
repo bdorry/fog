@@ -5,9 +5,9 @@ module Fog
 
         # Creates a linode and assigns you full privileges
         #
-        # ==== Parameters 	
+        # ==== Parameters
         # * datacenter_id<~Integer>: id of datacenter to place new linode in
-        # * plan_id<~Integer>: id of plan to boot new linode with        
+        # * plan_id<~Integer>: id of plan to boot new linode with
         # * payment_term<~Integer>: Subscription term in months, in [1, 12, 24]
         #
         # ==== Returns

@@ -63,8 +63,8 @@ module Fog
 
       return {
         :token => response.headers['X-Auth-Token'],
-        :server_management_url => response.headers['X-Server-Management-Url'] 
-      } 
+        :server_management_url => response.headers['X-Server-Management-Url']
+      }
 
     end
 
@@ -95,18 +95,18 @@ module Fog
         :path     =>  (uri.path and not uri.path.empty?) ? uri.path : 'v2.0'
       })
       body=MultiJson.decode(response.body)
-     
+
       if body['auth']['serviceCatalog'] and body['auth']['serviceCatalog'][@compute_service_name] and body['auth']['serviceCatalog'][@compute_service_name][0] then
         mgmt_url = body['auth']['serviceCatalog'][@compute_service_name][0]['publicURL']
         token = body['auth']['token']['id']
         return {
           :token => token,
           :server_management_url => mgmt_url
-        } 
+        }
       else
         raise "Unable to parse service catalog."
       end
- 
+
     end
 
   end

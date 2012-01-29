@@ -16,7 +16,7 @@ module Fog
           options = {}
           if kernel_id
             options.merge!(:kernelId => kernel_id)
-          end          
+          end
           request(
             :expects  => 200,
             :method   => 'GET',

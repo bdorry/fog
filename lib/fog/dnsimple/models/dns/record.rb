@@ -49,7 +49,7 @@ module Fog
             options[:type] = type if type
             data = connection.update_record(zone.domain, id, options)
           end
-          
+
           merge_attributes(data.body["record"])
           true
         end

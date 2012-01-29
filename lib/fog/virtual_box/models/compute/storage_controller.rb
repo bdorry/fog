@@ -57,7 +57,7 @@ module Fog
         def raw=(new_raw)
           @raw = new_raw
           raw_attributes = {}
-          # TODO: pending my patches being accepted :bootable, 
+          # TODO: pending my patches being accepted :bootable,
           for key in [:bus, :controller_type, :instance, :max_devices_per_port_count, :max_port_count, :min_port_count, :port_count, :use_host_io_cache]
             raw_attributes[key] = @raw.send(key)
           end

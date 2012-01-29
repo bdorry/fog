@@ -69,7 +69,7 @@ module Fog
 
             when 'AvailabilityZones'
               @in_availability_zones = false
-              
+
             when 'Granularity', 'Metric'
               @enabled_metric[name] = value
             when 'EnabledMetrics'

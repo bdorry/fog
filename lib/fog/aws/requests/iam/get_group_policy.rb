@@ -6,7 +6,7 @@ module Fog
         require 'fog/aws/parsers/iam/get_group_policy'
 
         # Get Group Policy
-        # 
+        #
         # ==== Parameters
         # * 'PolicyName'<~String>: Name of the policy to get
         # * 'GroupName'<~String>: Name of the Group who the policy is associated with.

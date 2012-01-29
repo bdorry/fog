@@ -8,7 +8,7 @@ module Fog
         extend Fog::Deprecation
         deprecate :ip, :value
         deprecate :ip=, :value=
-        
+
         identity :id
 
         attribute :name
@@ -23,7 +23,7 @@ module Fog
         attribute :hard_link, :aliases => "hardLink"
 
         attribute :value,          :aliases => "data"
-  
+
         def initialize(attributes={})
           self.ttl ||= 1800
           super

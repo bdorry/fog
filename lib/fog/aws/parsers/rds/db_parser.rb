@@ -7,9 +7,9 @@ module Fog
 
           def reset
             @db_instance = fresh_instance
-            
+
           end
-          
+
           def fresh_instance
             {'PendingModifiedValues' => [], 'DBSecurityGroups' => [], 'ReadReplicaDBInstanceIdentifiers' => [], 'Endpoint' => {}}
           end
@@ -34,17 +34,17 @@ module Fog
               @in_db_parameter_groups = true
               @db_parameter_groups = []
             end
-            
+
           end
 
           def end_element(name)
             case name
-              
+
             when 'LatestRestorableTime', 'InstanceCreateTime'
               @db_instance[name] = Time.parse value
-            when 'Engine', 
-              'DBInstanceStatus', 'DBInstanceIdentifier', 'EngineVersion', 
-              'PreferredBackupWindow', 'PreferredMaintenanceWindow', 
+            when 'Engine',
+              'DBInstanceStatus', 'DBInstanceIdentifier', 'EngineVersion',
+              'PreferredBackupWindow', 'PreferredMaintenanceWindow',
               'AvailabilityZone', 'MasterUsername', 'DBName', 'LicenseModel'
               @db_instance[name] = value
             when 'MultiAZ', 'AutoMinorVersionUpgrade'
@@ -63,7 +63,7 @@ module Fog
               if @in_db_parameter_groups
                 @db_parameter_group[name] = value
               end
-            
+
             when 'BackupRetentionPeriod'
               if @in_pending_modified_values
                 @pending_modified_values[name] = value.to_i
@@ -86,7 +86,7 @@ module Fog
             when 'DBSecurityGroup'
               @db_security_groups << @db_security_group
               @db_security_group = {}
-            
+
             when 'AllocatedStorage'
               if @in_pending_modified_values
                 @pending_modified_values[name] = value.to_i
@@ -101,7 +101,7 @@ module Fog
               elsif @in_endpoint
                 @endpoint[name] = value.to_i
               end
-      
+
             when 'PendingModifiedValues'
               @in_pending_modified_values = false
               @db_instance['PendingModifiedValues'] = @pending_modified_values

@@ -5,9 +5,9 @@ module Fog
   module Compute
     class AWS
       class SpotRequests < Fog::Collection
-      
+
         attribute :filters
-        
+
         model Fog::Compute::AWS::SpotRequest
 
         def initialize(attributes)
@@ -29,7 +29,7 @@ module Fog
                 spot_instance_request['LaunchSpecification.' + name[0,1].upcase + name[1..-1]] = value
               end
               spot_instance_request.merge(:groups => spot_instance_request['LaunchSpecification.GroupSet'])
-              spot_instance_request 
+              spot_instance_request
             end.flatten
           )
         end
