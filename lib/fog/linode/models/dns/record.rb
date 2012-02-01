@@ -42,8 +42,8 @@ module Fog
           options = {}
           # * options<~Hash>
           #   * weight<~Integer>: default: 5
-          #   * port<~Integer>: default: 80 
-          #   * protocol<~String>: The protocol to append to an SRV record. Ignored on other record 
+          #   * port<~Integer>: default: 80
+          #   * protocol<~String>: The protocol to append to an SRV record. Ignored on other record
           #                        types. default: udp
           options[:name]      = name if name
           options[:priority]  = priority if priority
@@ -60,7 +60,7 @@ module Fog
         end
 
         private
-        
+
         def zone=(new_zone)
           @zone = new_zone
         end

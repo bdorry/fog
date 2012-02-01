@@ -11,7 +11,7 @@ module Fog
         # ==== Returns
         # * response<~Excon::Response>:
         #   * body<~Array>:
-        # TODO: docs        
+        # TODO: docs
         def avail_linodeplans(linodeplan_id = nil)
           options = {}
           if linodeplan_id
@@ -22,7 +22,7 @@ module Fog
             :method   => 'GET',
             :query    => { :api_action => 'avail.linodeplans' }.merge!(options)
           )
-          
+
           #hack for plans not filtering by id like they should above, remove when they fix it.
           result.body["DATA"] = result.body["DATA"].select { |item| item['PLANID'] == linodeplan_id } if linodeplan_id
           result

@@ -7,7 +7,7 @@ class Slicehost < Fog::Bin
         Fog::Compute::Slicehost
       when :dns
         Fog::DNS::Slicehost
-      else 
+      else
         raise ArgumentError, "Unrecognized service: #{key}"
       end
     end

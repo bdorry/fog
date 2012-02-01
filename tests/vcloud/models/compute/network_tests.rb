@@ -19,9 +19,9 @@ Shindo.tests("Vcloud::Compute | network", ['vcloud']) do
     tests("configuration") do
       tests("parent network").returns("ParentNetwork1") { instance.configuration[:ParentNetwork][:name]}
       tests("dns").returns("172.0.0.2") { instance.configuration[:IpScope][:Dns1]}
-      
+
       tests("#fence_mode").returns("natRouted") { instance.configuration[:FenceMode] }
-      
+
       tests("features") do
         tests("dhcp_service") do
           tests("#is_enabled").returns("false") { instance.configuration[:Features][:DhcpService][:IsEnabled] }
@@ -37,7 +37,7 @@ Shindo.tests("Vcloud::Compute | network", ['vcloud']) do
         end
       end
     end
-    
+
     tests("#parent_network") do
       tests("returned network name").returns("ParentNetwork1"){ p = instance.parent_network; p.reload; p.name }
     end

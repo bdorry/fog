@@ -11,7 +11,7 @@ module Fog
 
         def all
           data = connection.list_servers.body['response']['servers']
-          load(data) 
+          load(data)
         end
 
         def get(identifier)

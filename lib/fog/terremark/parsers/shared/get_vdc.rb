@@ -11,7 +11,7 @@ module Fog
             @in_memory = false
             @in_instantiated_vms_quota = false
             @in_deployed_vms_quota = false
-            @response = { 
+            @response = {
               'links' => [],
               'AvailableNetworks' => [],
               'ComputeCapacity'   => {

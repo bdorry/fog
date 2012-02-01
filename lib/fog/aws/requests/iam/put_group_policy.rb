@@ -6,7 +6,7 @@ module Fog
         require 'fog/aws/parsers/iam/basic'
 
         # Add or update a policy for a group
-        # 
+        #
         # ==== Parameters
         # * group_name<~String>: name of the group
         # * policy_name<~String>: name of policy document

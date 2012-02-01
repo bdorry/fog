@@ -104,7 +104,7 @@ module Fog
           params[:headers] ||= {}
           params[:headers]['Date'] = Fog::Time.now.to_date_header
           params[:headers]['X-Amzn-Authorization'] = "AWS3-HTTPS AWSAccessKeyId=#{@aws_access_key_id},Algorithm=HmacSHA1,Signature=#{signature(params)}"
-          params[:path] = "/#{@version}/#{params[:path]}" 
+          params[:path] = "/#{@version}/#{params[:path]}"
           @connection.request(params, &block)
         end
 

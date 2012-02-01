@@ -8,7 +8,7 @@ fog is the Ruby cloud computing library, top to bottom:
 * Collections provide a simplified interface, making clouds easier to work with and switch between.
 * Requests allow power users to get the most out of the features of each individual cloud.
 * Mocks make testing and integrating a breeze.
-                                               
+
 ## Collections
 
 A high level interface to each cloud is provided through collections, such as `images` and `servers`.

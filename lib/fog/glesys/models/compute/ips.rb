@@ -18,16 +18,16 @@ module Fog
 
         def get(identifier)
           return nil if identifier.nil? || identifier == ""
-          
-          self.new( :serverid => identifier )          
+
+          self.new( :serverid => identifier )
 
           data  = connection.ip_list_own(:serverid => identifier).body['response']
           if data['iplist'].empty?
-            nil 
+            nil
           else
             new(data['iplist'].first)
-          end 
-        end 
+          end
+        end
 
         def new(attributes = {})
           super({ :serverid => serverid }.merge!(attributes))

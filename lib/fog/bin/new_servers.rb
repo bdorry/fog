@@ -5,7 +5,7 @@ class NewServers < Fog::Bin
       case key
       when :compute
         Fog::Compute::NewServers
-      else 
+      else
         raise ArgumentError, "Unsupported #{self} service: #{key}"
       end
     end

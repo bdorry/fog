@@ -16,7 +16,7 @@ module Fog
         attribute :sockets
         attribute :cores
         attribute :threads
-        
+
         attribute :type
         attribute :version
         attribute :uri

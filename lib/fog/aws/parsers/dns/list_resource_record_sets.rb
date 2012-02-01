@@ -13,7 +13,7 @@ module Fog
             @response['ResourceRecordSets'] = []
             @section = :resource_record_set
           end
-          
+
           def end_element(name)
             if @section == :resource_record_set
               case name

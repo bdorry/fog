@@ -7,10 +7,10 @@ module Fog
         #
         # ==== Parameters
         # * bucket_name<~String> - name of bucket to modify
-        # * policy<~Hash> - policy document 
+        # * policy<~Hash> - policy document
         #
         # ==== See Also
-        # http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html 
+        # http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html
 
         def put_bucket_policy(bucket_name, policy)
           request({

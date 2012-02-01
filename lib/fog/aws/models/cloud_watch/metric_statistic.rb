@@ -17,7 +17,7 @@ module Fog
         attribute :namespace, :aliases => 'Namespace'
         attribute :dimensions, :aliases => 'Dimensions'
         attribute :value
-        
+
         def save
           requires :metric_name
           requires :namespace

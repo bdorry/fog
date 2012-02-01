@@ -61,7 +61,7 @@ module Fog
           #   * refresh_sec<~Integer> numeric, default: '0'
           #   * retry_sec<~Integer> numeric, default: '0'
           #   * expire_sec<~Integer> numeric, default: '0'
-          #   * status<~Integer> 0, 1, or 2 (disabled, active, edit mode), default: 1 
+          #   * status<~Integer> 0, 1, or 2 (disabled, active, edit mode), default: 1
           #   * master_ips<~String> When type=slave, the zone's master DNS servers list, semicolon separated
           options[:description] = description if description
           options[:soa_email]   = email if email

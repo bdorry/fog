@@ -16,7 +16,7 @@ module Fog
               link = {}
               until attributes.empty?
                 link[attributes.shift] = attributes.shift
-              end            
+              end
               @response['Links'] << link
             when 'VAppTemplate'
               vapp_template = {}

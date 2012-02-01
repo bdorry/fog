@@ -6,8 +6,8 @@ module Fog
         require 'fog/aws/parsers/iam/get_group'
 
         # Get Group
-        # 
-        # ==== Parameters        
+        #
+        # ==== Parameters
         # * 'GroupName'<~String>: Name of the Group
         # * options<~Hash>:
         #   * 'Marker'<~String>: Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the Marker element in the response you just received.

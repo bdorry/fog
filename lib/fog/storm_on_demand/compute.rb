@@ -41,8 +41,8 @@ module Fog
       request :list_templates
       request :list_images
       request :get_stats
-      request :list_private_ips      
-      
+      request :list_private_ips
+
       class Mock
 
         def self.data

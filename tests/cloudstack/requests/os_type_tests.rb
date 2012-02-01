@@ -27,7 +27,7 @@ Shindo.tests('Fog::Compute[:cloudstack] | os type requests', ['cloudstack']) do
       pending if Fog.mocking?
       Fog::Compute[:cloudstack].list_os_types
     end
-    
+
     tests('#list_os_categories').formats(@os_categories_format) do
       pending if Fog.mocking?
       Fog::Compute[:cloudstack].list_os_categories

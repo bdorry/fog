@@ -5,7 +5,7 @@ class Google < Fog::Bin
       case key
       when :storage
         Fog::Storage::Google
-      else 
+      else
         raise ArgumentError, "Unsupported #{self} service: #{key}"
       end
     end

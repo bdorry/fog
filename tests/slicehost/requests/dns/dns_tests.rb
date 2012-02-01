@@ -5,7 +5,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
   @new_records =[]
 
   tests( 'success') do
-    
+
     test('get current zone count') do
       pending if Fog.mocking?
 
@@ -15,7 +15,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
         zones = response.body['zones']
         @org_zone_count = zones.count
       end
-      
+
       response.status == 200
     end
 
@@ -28,7 +28,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
         zone_id = response.body['id']
         @new_zones << zone_id
       end
-      
+
       response.status == 201
     end
 
@@ -42,7 +42,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
         @zone_id = response.body['id']
         @new_zones << @zone_id
       end
-      
+
       response.status == 201
     end
 
@@ -50,16 +50,16 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
       pending if Fog.mocking?
 
       result= false
-      
+
       response = Fog::DNS[:slicehost].get_zone( @zone_id)
       if response.status == 200
         zone = response.body
         if (zone['origin'] == @domain) and (zone['ttl'] == 1800) and
-          (zone['active'] == 'N') 
+          (zone['active'] == 'N')
           result= true;
         end
       end
-      
+
       result
     end
 
@@ -67,7 +67,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
       pending if Fog.mocking?
 
       result= false
-      
+
       response = Fog::DNS[:slicehost].get_zones()
       if response.status == 200
         zones = response.body['zones']
@@ -75,7 +75,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
           result= true;
         end
       end
-      
+
       result
     end
 
@@ -83,14 +83,14 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
       pending if Fog.mocking?
 
       result= false
-      
+
       response = Fog::DNS[:slicehost].get_zones()
       if response.status == 200
         zones = response.body['zones']
         zones.each { |zone|
           if zone['id'] == @new_zones[1]
              if (zone['origin'] == 'sub.' + @domain) and (zone['ttl'] == 1800) and
-               (zone['active'] == 'N') 
+               (zone['active'] == 'N')
                result= true;
              end
           end
@@ -99,7 +99,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
           result= true;
         end
       end
-      
+
       result
     end
 
@@ -113,7 +113,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
         record_id = response.body['id']
         @new_records << record_id
       end
-      
+
       response.status == 201
     end
 
@@ -128,7 +128,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
         record_id = response.body['id']
         @new_records << record_id
       end
-      
+
       response.status == 201
     end
 
@@ -141,7 +141,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
         record_id = response.body['id']
         @new_records << record_id
       end
-      
+
       response.status == 201
     end
 
@@ -156,7 +156,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
         record_id = response.body['id']
         @new_records << record_id
       end
-      
+
       response.status == 201
     end
 
@@ -171,7 +171,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
         @record_id = response.body['id']
         @new_records << @record_id
       end
-      
+
       response.status == 201
     end
 
@@ -179,7 +179,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
       pending if Fog.mocking?
 
       result= false
-      
+
       response = Fog::DNS[:slicehost].get_record(@record_id)
       if response.status == 200
         mail_domain = 'mail.' + @domain
@@ -190,19 +190,19 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
           result = true
         end
       end
-              
+
       result
     end
-    
+
     test('get records - verify all parameters for one record') do
       pending if Fog.mocking?
 
       result = false
-      
+
       response = Fog::DNS[:slicehost].get_records()
       if response.status == 200
         records = response.body['records']
-        
+
         #find mx record
         records.each {|record|
           if (record['record_type'] == 'MX') and (record['name'] == @domain)
@@ -217,7 +217,7 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
           end
         }
       end
-              
+
       result
     end
 
@@ -264,11 +264,11 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
       pending if Fog.mocking?
 
       @new_zone = Fog::DNS[:slicehost].zones.get(@zone_id)
-      
+
       records = @new_zone.records
       records.length == @new_records.length
     end
-    
+
     test("delete #{@new_records.count} records created") do
       pending if Fog.mocking?
 
@@ -281,12 +281,12 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
       }
       result
     end
-    
+
     test("delete #{@new_zones.count} zones created") do
       pending if Fog.mocking?
 
       result= true
-      
+
       @new_zones.each { |zone_id|
         response = Fog::DNS[:slicehost].delete_zone( zone_id)
         if response.status != 200
@@ -299,16 +299,16 @@ Shindo.tests('Fog::DNS[:slicehost] | DNS requests', ['slicehost', 'dns']) do
 
   end
 
-  
+
   tests( 'failure') do
-    
+
     #create a zone with invalid parameters
     #get zonfo info with invalid zone id
     #delete a zone with an invalid zone id
-    
+
     tests('#create_zone') do
     end
-    
+
   end
-    
+
 end

@@ -13,5 +13,5 @@ module Fog
       { :duration => duration }
     end
   end
-  
+
 end

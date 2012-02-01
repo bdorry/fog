@@ -21,7 +21,7 @@ module Fog
           if opts[:max_records]
             params['MaxRecords'] = opts[:max_records]
           end
-          
+
           request({
             'Action'  => 'DescribeDBInstances',
             :parser   => Fog::Parsers::AWS::RDS::DescribeDBInstances.new
@@ -35,7 +35,7 @@ module Fog
         def describe_db_instances(identifier=nil, opts={})
           response = Excon::Response.new
           server_set = []
-          if identifier   
+          if identifier
             if server = self.data[:servers][identifier]
               server_set << server
             else
@@ -44,7 +44,7 @@ module Fog
           else
             server_set = self.data[:servers].values
           end
-          
+
           server_set.each do |server|
              case server["DBInstanceStatus"]
              when "creating"
@@ -52,7 +52,7 @@ module Fog
                    region = "us-east-1"
                    server["DBInstanceStatus"] = "available"
                    server["AvailabilityZone"] = region + 'a'
-                   server["Endpoint"] = {"Port"=>3306, 
+                   server["Endpoint"] = {"Port"=>3306,
                                          "Address"=> Fog::AWS::Mock.rds_address(server["DBInstanceIdentifier"],region) }
                    server["PendingModifiedValues"] = {}
                  end
@@ -78,10 +78,10 @@ module Fog
                 if server["PendingModifiedValues"]
                   server["DBInstanceStatus"] = 'modifying'
                 end
-                  
-             end 
+
+             end
           end
-          
+
           response.status = 200
           response.body = {
             "ResponseMetadata"=>{ "RequestId"=> Fog::AWS::Mock.request_id },
@@ -89,7 +89,7 @@ module Fog
           }
           response
         end
-        
+
 
       end
     end

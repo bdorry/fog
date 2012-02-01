@@ -12,8 +12,8 @@ module Fog
         def all(filter=nil)
           data=[]
           filter={} if filter.nil?
-          include_defined=filter.has_key?(:defined) ? filter[:defined] : true  
-          include_active=filter.has_key?(:active) ? filter[:active] : true  
+          include_defined=filter.has_key?(:defined) ? filter[:defined] : true
+          include_active=filter.has_key?(:active) ? filter[:active] : true
 
           unless filter.has_key?(:name) || filter.has_key?(:uuid)
             if include_defined

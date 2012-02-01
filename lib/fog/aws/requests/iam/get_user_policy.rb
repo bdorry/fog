@@ -6,7 +6,7 @@ module Fog
         require 'fog/aws/parsers/iam/get_user_policy'
 
         # Get User Policy
-        # 
+        #
         # ==== Parameters
         # * 'PolicyName'<~String>: Name of the policy to get
         # * 'UserName'<~String>: Name of the User who the policy is associated with.

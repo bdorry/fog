@@ -45,7 +45,7 @@ module Fog
         end
 
         def save
-          
+
           requires :name, :type, :value, :zone
           options = {}
           options[:active]  = active ? 'Y' : 'N'
@@ -61,7 +61,7 @@ module Fog
         end
 
         private
-        
+
         def zone=(new_zone)
           @zone = new_zone
         end

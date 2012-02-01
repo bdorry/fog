@@ -74,7 +74,7 @@ class Glesys
               'amount'      =>  Float,
               'timeperiod'  => String,
               'currency'    => String
-            }, 
+            },
             'serverid'    => String,
             'datacenter'  => String,
             'memory'      => String,
@@ -85,7 +85,7 @@ class Glesys
               'cost'    => String,
               'version' => String,
               'ip'      => String
-            }], 
+            }],
             'description' => String,
             'hostname'    => String,
             'disk'        => String,

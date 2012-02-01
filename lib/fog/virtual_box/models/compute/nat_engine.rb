@@ -47,7 +47,7 @@ module Fog
         def raw
           @raw
         end
-        
+
         def raw=(new_raw)
           @raw = new_raw
           raw_attributes = {}

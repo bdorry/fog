@@ -16,8 +16,8 @@ module Fog
         attribute :updated_at,  :aliases => 'updated-at'
 
         # <custom-nameservers>ns1.example.com,ns2.example.com</custom-nameservers>
-        # <custom-ns type="boolean">true</custom-ns> 
-        # <hostmaster>dnsadmin@example.com</hostmaster> 
+        # <custom-ns type="boolean">true</custom-ns>
+        # <hostmaster>dnsadmin@example.com</hostmaster>
         # <notes nil="true"/>
         # <ns1 nil="true"/>
         # <nx-ttl nil="true"></nx-ttl>

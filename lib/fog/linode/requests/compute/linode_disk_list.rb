@@ -7,7 +7,7 @@ module Fog
           options = {}
           if disk_id
             options.merge!(:diskId => disk_id)
-          end          
+          end
           request(
             :expects  => 200,
             :method   => 'GET',

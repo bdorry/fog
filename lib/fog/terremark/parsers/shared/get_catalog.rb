@@ -16,7 +16,7 @@ module Fog
               catalog_item = {}
               until attributes.empty?
                 catalog_item[attributes.shift] = attributes.shift
-              end            
+              end
               @response['CatalogItems'] << catalog_item
             when 'Catalog'
               catalog = {}

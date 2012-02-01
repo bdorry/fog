@@ -28,7 +28,7 @@ module Fog
         #       * 'updated-at'<~String>
         #       * 'hosts'<~String>
         #       * 'axfr-ips'<~String>
-        #       * 'restrict-axfr'<~String>    
+        #       * 'restrict-axfr'<~String>
         #   * 'status'<~Integer> - 200 indicates success
         def list_zones
           request(

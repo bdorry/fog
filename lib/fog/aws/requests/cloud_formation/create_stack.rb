@@ -60,7 +60,7 @@ module Fog
           if options['TimeoutInMinutes']
             params['TimeoutInMinutes'] = options['TimeoutInMinutes']
           end
-          
+
           if options['Capabilities']
             params.merge!(Fog::AWS.indexed_param("Capabilities.member", [*options['Capabilities']]))
           end

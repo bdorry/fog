@@ -142,7 +142,7 @@ module Fog
         #    user_data=nil
         #  >
         #
-        
+
         def get(server_id)
           if server_id
             self.class.new(:connection => connection).all('instance-id' => server_id).first

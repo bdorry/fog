@@ -17,5 +17,5 @@ Shindo.tests('AWS::STS | session tokens', ['aws']) do
 		pending if Fog.mocking?
 		Fog::AWS[:sts].get_federation_token("test@fog.io", @policy).body
 	end
-	
+
 end

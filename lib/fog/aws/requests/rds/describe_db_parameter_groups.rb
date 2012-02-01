@@ -24,7 +24,7 @@ module Fog
           if opts[:max_records]
             params['MaxRecords'] = opts[:max_records]
           end
-          
+
           request({
             'Action'  => 'DescribeDBParameterGroups',
             :parser   => Fog::Parsers::AWS::RDS::DescribeDBParameterGroups.new

@@ -3,7 +3,7 @@ require 'fog/core/model'
 module Fog
   module Compute
     class AWS
-      
+
       class SpotRequest < Fog::Model
 
         identity :id,                          :aliases => 'spotInstanceRequestId'
@@ -107,4 +107,4 @@ module Fog
       end
     end
   end
-end     
+end

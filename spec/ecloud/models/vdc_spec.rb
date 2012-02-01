@@ -33,11 +33,11 @@ if Fog.mocking?
       its(:available_networks)    { should have(2).items }
 
       its(:compute_capacity)      { should == {:Memory =>
-                                                {:Allocated => @mock_vdc.memory_allocated.to_s, :Units => "bytes * 2^20"}, 
+                                                {:Allocated => @mock_vdc.memory_allocated.to_s, :Units => "bytes * 2^20"},
                                                :DeployedVmsQuota =>
                                                 {:Limit => "-1", :Used => "-1"},
                                                :InstantiatedVmsQuota =>
-                                                {:Limit => "-1", :Used => "-1"}, 
+                                                {:Limit => "-1", :Used => "-1"},
                                                :Cpu =>
                                                 {:Allocated => @mock_vdc.cpu_allocated.to_s, :Units => "hz * 10^6"}} }
 
