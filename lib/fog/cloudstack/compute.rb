@@ -17,16 +17,22 @@ module Fog
       request_path 'fog/cloudstack/requests/compute'
       
       request :acquire_ip_address
+      request :add_vpn_user
       request :assign_to_load_balancer_rule
       request :attach_volume
       request :authorize_security_group_ingress
+      request :authorize_security_group_egress
       request :change_service_for_virtual_machine
       request :copy_template
       request :create_account
       request :create_domain
+      request :create_egress_firewall_rule
+      request :create_firewall_rule
+      request :create_ip_forwarding_rule
       request :create_load_balancer_rule
       request :create_network
       request :create_port_forwarding_rule
+      request :create_remote_access_vpn
       request :create_security_group
       request :create_ssh_key_pair
       request :create_snapshot
@@ -35,9 +41,14 @@ module Fog
       request :create_volume
       request :delete_account
       request :delete_domain
+      request :delete_egress_firewall_rule
+      request :delete_firewall_rule
+      request :delete_ip_forwarding_rule
       request :delete_load_balancer_rule
       request :delete_port_forwarding_rule
+      request :delete_network
       request :delete_security_group
+      request :delete_remote_access_vpn
       request :delete_ssh_key_pair
       request :delete_snapshot
       request :delete_snapshot_policies
@@ -45,9 +56,13 @@ module Fog
       request :delete_volume
       request :detach_volume
       request :deploy_virtual_machine
+      request :destroy_router
       request :destroy_virtual_machine
       request :disable_user
+      request :disable_static_nat
+      request :disassociate_ip_address
       request :enable_user
+      request :enable_static_nat
       request :generate_usage_records
       request :get_vm_password
       request :list_accounts
@@ -61,13 +76,16 @@ module Fog
       request :list_capacity
       request :list_domains
       request :list_domain_children
+      request :list_egress_firewall_rules
       request :list_events
       request :list_external_firewalls
       request :list_external_load_balancers
+      request :list_firewall_rules
       request :list_hosts
       request :list_hypervisors
       request :list_instance_groups
       request :list_isos
+      request :list_ip_forwarding_rules
       request :list_load_balancer_rules
       request :list_load_balancer_rule_instances
       request :list_network_offerings
@@ -77,7 +95,9 @@ module Fog
       request :list_pods
       request :list_port_forwarding_rules
       request :list_public_ip_addresses
+      request :list_remote_access_vpns
       request :list_resource_limits
+      request :list_routers
       request :list_security_groups
       request :list_service_offerings
       request :list_snapshots
@@ -89,20 +109,28 @@ module Fog
       request :list_users
       request :list_virtual_machines
       request :list_volumes
+      request :list_vpn_users
       request :list_zones
       request :migrate_virtual_machine
       request :query_async_job_result
+      request :reboot_router
       request :reboot_virtual_machine
       request :recover_virtual_machine
       request :register_ssh_key_pair
       request :register_user_keys
       request :remove_from_load_balancer_rule
+      request :remove_vpn_user
+      request :restart_network
       request :reset_password_for_virtual_machine
       request :revoke_security_group_ingress
+      request :revoke_security_group_egress
+      request :start_router
       request :start_virtual_machine      
       request :stop_virtual_machine
+      request :stop_router
       request :update_account
       request :update_domain
+      request :update_network
       request :update_user
       request :update_resource_count
       request :update_virtual_machine
